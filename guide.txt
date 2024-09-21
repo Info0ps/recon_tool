@@ -1,0 +1,27 @@
+recon_tool/
+├── config/
+│   └── config.ini
+├── data/
+│   └── scan_data.csv
+├── logs/
+├── models/
+│   └── stealthy_mode_model.pkl
+├── templates/
+│   └── report_template.html
+├── wordlists/
+│   ├── subdomains.txt
+│   ├── subdomains_fallback.txt
+│   ├── directories.txt
+│   ├── directories_fallback.txt
+│   └── api_endpoints.txt
+├── recon_tool/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── logging_config.py
+│   ├── ml_model.py
+│   ├── scanners.py
+│   └── utils.py
+├── main.py
+├── train_model.py
+├── requirements.txt
+└── README.md

@@ -1,0 +1,4 @@
+response_time,status_code,content_length,waf_detected,stealthy_mode
+0.8,200,1024,0,0
+2.5,503,512,1,1
+1.2,200,2048,0,0

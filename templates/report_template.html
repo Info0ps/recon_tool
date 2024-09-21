@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reconnaissance Report for {{ target }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        h2 { color: #555; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .warning { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Reconnaissance Report for {{ target }}</h1>
+
+    <h2>Subdomains</h2>
+    <ul>
+        {% for subdomain in results.subdomains %}
+            <li>{{ subdomain }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Directories</h2>
+    <ul>
+        {% for directory in results.directories %}
+            <li>{{ directory }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>API Endpoints</h2>
+    <ul>
+        {% for api in results.api_endpoints %}
+            <li>{{ api }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Nmap Scan Results</h2>
+    <pre>{{ results.nmap_scan }}</pre>
+
+    <h2>Sensitive Information</h2>
+    {% for info in results.sensitive_info %}
+        <p>URL: {{ info.url }}</p>
+        <p>Keywords Found: {{ info.keywords }}</p>
+    {% endfor %}
+
+    <h2>JWT Vulnerabilities</h2>
+    {% for jwt in results.jwt_vulnerabilities %}
+        <p>URL: {{ jwt.url }}</p>
+        <p>Issue: {{ jwt.issue }}</p>
+    {% endfor %}
+
+    <h2>IDOR Vulnerabilities</h2>
+    {% for idor in results.idor_vulnerabilities %}
+        <p>URL: {{ idor.url }}</p>
+        <p>Parameter: {{ idor.parameter }}</p>
+        <p>Original Value: {{ idor.original_value }}</p>
+        <p>Altered Value: {{ idor.altered_value }}</p>
+    {% endfor %}
+
+    <h2>Resource Issues</h2>
+    {% for resource in results.resource_issues %}
+        <p>URL: {{ resource.url }}</p>
+        <p>Findings: {{ resource.findings }}</p>
+    {% endfor %}
+
+    <h2>WhatWeb Scan Results</h2>
+    {% for whatweb in results.whatweb %}
+        <pre>{{ whatweb }}</pre>
+    {% endfor %}
+
+</body>
+</html>
