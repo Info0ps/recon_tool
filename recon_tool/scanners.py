@@ -109,6 +109,7 @@ class ReconRunner:
             ]
             logging.debug(f"Running wafw00f command: {' '.join(wafw00f_command)}")
 
+            # TODO: subprocess.Popen(["/bin/zsh", "-i", "-c", " ".join(command_as_a_list)])
             process = await asyncio.create_subprocess_exec(
                 *wafw00f_command,
                 stdout=asyncio.subprocess.PIPE,
