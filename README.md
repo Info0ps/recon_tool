@@ -13,6 +13,7 @@
      \/       \/               \/      \/              \/                   |__|       \/ 
 
 
+
 This tool automates various reconnaissance tasks for Capture The Flag (CTF) challenges, HackTheBox, TryHackMe, and similar environments. It integrates multiple scanning tools to discover subdomains, directories, API endpoints, and potential vulnerabilities.
 
 ## Features
