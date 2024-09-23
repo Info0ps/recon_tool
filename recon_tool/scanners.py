@@ -244,7 +244,7 @@ class ReconRunner:
         log_file = os.path.join(self.output_dir, 'scan_data.csv')
         file_exists = os.path.isfile(log_file)
         async with aiofiles.open(log_file, 'a', newline='') as f:
-            writer = csv.DictWriter(await f.__aenter__(), fieldnames=data.keys())
+            writer = csv.DictWriter(f, fieldnames=data.keys())
             if not file_exists:
                 await writer.writeheader()
             await writer.writerow(data)
@@ -322,13 +322,15 @@ class ReconRunner:
                     "ffuf",
                     "-ic",                      # Ignore wordlist comments
                     "-s",                       # Silent mode
-                    "-u", f"http://FUZZ.{self.target}" if not is_ip_address(self.target) else f"http://{self.target}",
+                    "-u", f"http://{self.target}",
                     "-w", wordlist,
                     "-t", threads,
                     "-mc", "200,301",
                     "-of", "json",
                     "-o", "-"                   # Output to stdout for easy parsing
                 ]
+                if not is_ip_address(self.target):
+                    ffuf_command.extend(["-H", f"Host:FUZZ.{self.target}"])
 
                 output = await self.run_ffuf(ffuf_command)
                 if output is None:
@@ -756,7 +758,7 @@ class ReconRunner:
         try:
             async with aiofiles.open(report_file_csv, 'w', newline='') as f:
                 fieldnames = ['Type', 'Data']
-                writer = csv.DictWriter(await f.__aenter__(), fieldnames=fieldnames)
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
                 await writer.writeheader()
                 for key, values in self.results.items():
                     for value in values:
