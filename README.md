@@ -38,7 +38,7 @@ This tool automates various reconnaissance tasks for Capture The Flag (CTF) chal
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/recon_tool.git
+git clone https://github.com/Info0ps/recon_tool.git
 cd recon_tool
 ```
 
