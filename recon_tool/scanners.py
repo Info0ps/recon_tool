@@ -321,16 +321,16 @@ class ReconRunner:
                 ffuf_command = [
                     "ffuf",
                     "-ic",                      # Ignore wordlist comments
-                    "-s",                       # Silent mode
+#                    "-s",                       # Silent mode
                     "-u", f"http://{self.target}",
                     "-w", wordlist,
                     "-t", threads,
                     "-mc", "200,301",
                     "-of", "json",
-                    "-o", "-"                   # Output to stdout for easy parsing
+                    "-o", "output/subdomain_fuzzing.json"                   # Output to stdout for easy parsing
                 ]
                 if not is_ip_address(self.target):
-                    ffuf_command.extend(["-H", f"Host:FUZZ.{self.target}"])
+                    ffuf_command.extend(["-H", f"Host: FUZZ.{self.target}"])
 
                 output = await self.run_ffuf(ffuf_command)
                 if output is None:
@@ -385,13 +385,13 @@ class ReconRunner:
                 ffuf_command = [
                     "ffuf",
                     "-ic",                      # Ignore wordlist comments
-                    "-s",                       # Silent mode
+#                    "-s",                       # Silent mode
                     "-u", f"{url.rstrip('/')}/FUZZ",
                     "-w", wordlist,
                     "-t", threads,
                     "-mc", "200,301,302,403",
                     "-of", "json",
-                    "-o", "-"                   # Output to stdout for easy parsing
+                    "-o", "output/directory_fuzzing.json"                   # Output to stdout for easy parsing
                 ]
 
                 output = await self.run_ffuf(ffuf_command)
@@ -444,13 +444,13 @@ class ReconRunner:
             ffuf_command = [
                 "ffuf",
                 "-ic",                      # Ignore wordlist comments
-                "-s",                       # Silent mode
+#                "-s",                       # Silent mode
                 "-u", f"http://{self.target}/FUZZ",
                 "-w", wordlist,
                 "-t", threads,
                 "-mc", "200,201,202,204,301,302,307,401,403",
                 "-of", "json",
-                "-o", "-"                   # Output to stdout for easy parsing
+                "-o", "output/api_fuzzing.json"                   # Output to stdout for easy parsing
             ]
 
             output = await self.run_ffuf(ffuf_command)
@@ -778,8 +778,8 @@ class ReconRunner:
             await self.detect_waf()
 
             tasks = [
-                self.port_scan_nmap(),
-                self.subdomain_fuzzing(),
+#                self.port_scan_nmap(),
+#                self.subdomain_fuzzing(),
                 self.directory_fuzzing(f"http://{self.target}", depth=self.config.getint('DEFAULT', 'MaxScanDepth', fallback='2')),
                 self.api_fuzzing(),
                 self.extract_linked_resources(f"http://{self.target}")

@@ -3,6 +3,7 @@
 import joblib
 import logging
 import os
+import pandas as pd
 
 class MLModel:
     def __init__(self, model_path: str):
@@ -31,8 +32,10 @@ class MLModel:
         """
         try:
             # Example feature vector; adjust based on your model's training
+            feature_columns = ['response_time', 'status_code', 'content_length', 'waf_detected']
             features = [[response_time, status_code, content_length, int(waf_detected)]]
-            prediction = self.model.predict(features)
+            features_df = pd.DataFrame(features, columns=feature_columns)
+            prediction = self.model.predict(features_df)
             return bool(prediction[0])
         except Exception as e:
             logging.exception(f"Failed to make prediction with ML model: {e}")
