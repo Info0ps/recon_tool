@@ -82,6 +82,7 @@ def check_dependencies():
     required_tools = ['nmap', 'ffuf', 'wafw00f', 'whatweb']
     missing_tools = []
     for tool in required_tools:
+        # TODO: look for aliases as well
         if shutil.which(tool) is None:
             missing_tools.append(tool)
 
@@ -113,6 +114,7 @@ def main():
     """
     Main function to parse arguments and run recon.
     """
+    # TODO: Give target url example in help
     parser = argparse.ArgumentParser(description='Reconnaissance Automation Tool with Advanced Features')
     parser.add_argument('--target', required=True, help='Target domain, IP address, or URL')
     parser.add_argument('--config', default=DEFAULT_CONFIG_FILE, help='Path to configuration file')
