@@ -16,6 +16,8 @@
 
 This tool automates various reconnaissance tasks for Capture The Flag (CTF) challenges, HackTheBox, TryHackMe, and similar environments. It integrates multiple scanning tools to discover subdomains, directories, API endpoints, and potential vulnerabilities.
 
+Disclaimer: This tool is intended for legal and ethical purposes only, such as CTF challenges, penetration testing on systems you own, or those for which you have explicit permission.
+
 ## Features
 
 - **WAF Detection:** Identifies if the target is behind a Web Application Firewall (WAF) using `wafw00f`.
